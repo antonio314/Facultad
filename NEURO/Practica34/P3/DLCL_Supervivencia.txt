@@ -1,0 +1,45 @@
+Identificador    Columna    Supervivencia  Indicador de
+     DLCL                      Meses     Supervivencia
+                                        0-Vive 1-Muerto
+
+DLCL-0001     24                77.4           0
+DLCL-0002     35                3.4            1
+DLCL-0003     38                71.3           1
+DLCL-0004     8                 69.6           0
+DLCL-0005     30                51.2           0
+DLCL-0006     19                3.2            1
+DLCL-0007     4                 8.3            1
+DLCL-0008     13               102.4           0
+DLCL-0009     96                89.8           0
+DLCL-0010     27                88.1           0
+DLCL-0011     17                27.1           1
+DLCL-0012     46                4.1            1
+DLCL-0013     34                23.7           1
+DLCL-0014     39                 59            0
+DLCL-0015     28                56.6           0
+DLCL-0016     36                15.5           1
+DLCL-0017     44                2.4            1
+DLCL-0018     25                2.9            1
+DLCL-0020     37                80.4           0
+DLCL-0021     47                4.6            1
+DLCL-0023     31                8.2            1
+DLCL-0024     33               129.9           0
+DLCL-0025     42                32.5           1
+DLCL-0026     29                11.8           1
+DLCL-0027     32                5.1            1
+DLCL-0028     45                90.2           0
+DLCL-0029     9                 83.8           0
+DLCL-0030     7                 71.3           0
+DLCL-0031     5                 12.3           1
+DLCL-0032     18                69.1           0
+DLCL-0033     41                68.8           0
+DLCL-0034     15                1.3            1
+DLCL-0036     6                12.67           1
+DLCL-0037     26               72.03           0
+DLCL-0039     22               91.33           0
+DLCL-0040     43               53.73           0
+DLCL-0041     71               31.47           1
+DLCL-0042     3                39.60           1
+DLCL-0048     40                9.45           1
+DLCL-0049     20               22.30           1
+ 

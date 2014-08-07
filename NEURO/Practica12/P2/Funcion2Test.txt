@@ -1,0 +1,205 @@
+No. of patterns :50
+No. of input units :2
+No. of output units :1
+
+
+ # Input pattern 1
+0.187 0.168
+# Outoput pattern 1
+1946.49
+ # Input pattern 2
+0.482 0.603
+# Outoput pattern 2
+55.3529
+ # Input pattern 3
+0.308 0.468
+# Outoput pattern 3
+215.057
+ # Input pattern 4
+0.094 0.063
+# Outoput pattern 4
+31475.4
+ # Input pattern 5
+0.224 0.693
+# Outoput pattern 5
+513.623
+ # Input pattern 6
+0.543 0.729
+# Outoput pattern 6
+35.978
+ # Input pattern 7
+0.273 0.206
+# Outoput pattern 7
+630.665
+ # Input pattern 8
+0.298 0.784
+# Outoput pattern 8
+187.725
+ # Input pattern 9
+0.156 0.121
+# Outoput pattern 9
+4336.23
+ # Input pattern 10
+0.859 0.432
+# Outoput pattern 10
+34.5404
+ # Input pattern 11
+0.787 0.465
+# Outoput pattern 11
+33.2727
+ # Input pattern 12
+0.903 0.993
+# Outoput pattern 12
+10.478
+ # Input pattern 13
+0.087 0.454
+# Outoput pattern 13
+18601.4
+ # Input pattern 14
+0.098 0.464
+# Outoput pattern 14
+11726.1
+ # Input pattern 15
+0.055 0.873
+# Outoput pattern 15
+110759
+ # Input pattern 16
+0.162 0.595
+# Outoput pattern 16
+1704.27
+ # Input pattern 17
+0.041 0.996
+# Outoput pattern 17
+356278
+ # Input pattern 18
+0.55 0.349
+# Outoput pattern 18
+83.8325
+ # Input pattern 19
+0.465 0.644
+# Outoput pattern 19
+57.1501
+ # Input pattern 20
+0.765 0.041
+# Outoput pattern 20
+15169.3
+ # Input pattern 21
+0.69 0.308
+# Outoput pattern 21
+80.114
+ # Input pattern 22
+0.77 0.963
+# Outoput pattern 22
+14.0236
+ # Input pattern 23
+0.514 0.421
+# Outoput pattern 23
+71.3328
+ # Input pattern 24
+0.099 0.022
+# Outoput pattern 24
+167678
+ # Input pattern 25
+0.542 0.311
+# Outoput pattern 25
+103.427
+ # Input pattern 26
+0.806 0.682
+# Outoput pattern 26
+18.6178
+ # Input pattern 27
+0.776 0.709
+# Outoput pattern 27
+18.7983
+ # Input pattern 28
+0.027 0.215
+# Outoput pattern 28
+1.91206e+06
+ # Input pattern 29
+0.516 0.125
+# Outoput pattern 29
+749.84
+ # Input pattern 30
+0.032 0.923
+# Outoput pattern 30
+957834
+ # Input pattern 31
+0.998 0.194
+# Outoput pattern 31
+187.882
+ # Input pattern 32
+0.518 0.392
+# Outoput pattern 32
+77.463
+ # Input pattern 33
+0.19 0.069
+# Outoput pattern 33
+7034.81
+ # Input pattern 34
+0.093 0.007
+# Outoput pattern 34
+3.3273e+06
+ # Input pattern 35
+0.065 0.858
+# Outoput pattern 35
+57094.6
+ # Input pattern 36
+0.048 0.755
+# Outoput pattern 36
+190578
+ # Input pattern 37
+0.167 0.171
+# Outoput pattern 37
+2600.82
+ # Input pattern 38
+0.07 0.033
+# Outoput pattern 38
+138305
+ # Input pattern 39
+0.944 0.17
+# Outoput pattern 39
+268.598
+ # Input pattern 40
+0.408 0.838
+# Outoput pattern 40
+69.0706
+ # Input pattern 41
+0.481 0.214
+# Outoput pattern 41
+237.887
+ # Input pattern 42
+0.52 0.609
+# Outoput pattern 42
+46.2721
+ # Input pattern 43
+0.276 0.899
+# Outoput pattern 43
+234.11
+ # Input pattern 44
+0.825 0.792
+# Outoput pattern 44
+15.1166
+ # Input pattern 45
+0.376 0.209
+# Outoput pattern 45
+343.707
+ # Input pattern 46
+0.715 0.375
+# Outoput pattern 46
+53.4468
+ # Input pattern 47
+0.403 0.586
+# Outoput pattern 47
+88.1067
+ # Input pattern 48
+0.119 0.945
+# Outoput pattern 48
+5286.02
+ # Input pattern 49
+0.119 0.945
+# Outoput pattern 49
+5286.02
+ # Input pattern 50
+0.305 0.072
+# Outoput pattern 50
+4033.6

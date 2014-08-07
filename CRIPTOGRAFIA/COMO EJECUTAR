@@ -1,0 +1,4 @@
+- Abrir una consola de comandos y ejecutar el comando cd para posicionarnos en la carpeta dist de la pŕactica que queremos ejecutar.
+- Una vez ahí, lo único que tenemos que hacer es ejecutar el comando: java -jar "Nombre del jar correspondiente"
+
+Hecho esto, nos aparecerá un menú detallado con las operaciones que nos permite realizar cada práctica. elegida una opción nos pedirá la entrada de diferentes valores que harán posible que las operaciones se realicen correctamente.

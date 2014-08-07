@@ -1,0 +1,438 @@
+/*	Grua 
+
+	C.A.D. 						Curso 2008-2009
+ 	
+	Codigo base para la realización de las practicas de CAD
+
+	modulo modelo.c
+	Dibujo del modelo
+=======================================================
+	J.C. Torres 
+	Dpto. Lenguajes y Sistemas Informticos
+	(Univ. de Granada, SPAIN)
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details 
+ http://www.gnu.org/copyleft/gpl.html
+
+=======================================================
+Queda prohibido cobrar canon por la copia de este software
+
+*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <GL/glut.h>                   // Libreria de utilidades de OpenGL
+#define __modelo__			// Hace que se asigne memoria a las variables globales
+
+#include "helicoptero.h"
+
+#define PI 3.141592
+
+int COLORGRUA=0;
+
+// DATO!!! 1 radian = 57.2957795 grados
+
+//FUNCION PARA PASAR DE GRADOS A RADIANES
+float grad2rad(float num){
+
+	return (num/57.2957795);
+
+}
+
+//FUNCION PARA PASAR DE RADIANES A GRADOS
+
+float rad2grad(float num){
+
+	return (num*57.2957795);
+
+}
+
+
+/**	void initModel()
+
+Inicializa el modelo y de las variables globales
+
+**/
+
+void initModel()
+{
+/**
+	Definicion de los colores usados.
+**/
+float colores[9][4]={{1,1,0,1.},{0.7,0.7,0.7,1},{1.0,0.3,0.3,1},
+   		   {0.7,0.6,0.2,1},{0.2,1.0,1.0,1},{1.0,0.86,0.3,1},
+		   {0.4,1,0.4,1.},{1,0.6,1,1.},{0,0,1,1.}};
+int i,j;
+	for(i=0;i<4;++i)
+		for(j=0;j<9;++j)
+			color[j][i]=colores[j][i];
+
+	COLORGRUA=0;
+
+/** 
+
+Parametros iniciales de la camara
+
+**/
+	view_rotx=-30.0;	// Angulos de rotacion 
+	view_roty=-45.0;
+	view_rotz=0.0;
+	d=100.0;
+
+	x_camara=20;		// Posicion de la camara
+	y_camara=2;
+	z_camara=20;
+
+	VISTA_PERSPECTIVA=0;	// Flag perspectiva/paralela
+
+	ventanaMundoParalela=200;	// Ventana para proyeccion paralela
+	origenXVentanaMundoParalelo=0;	
+	origenYVentanaMundoParalelo=0;
+
+/** 
+
+Parametros iniciales del helicoptero
+
+**/
+   helic.altura = 0;
+   helic.angY = 0;
+   //helic.longitudX = 0;
+   helic.helices_on = 0;//variable "booleana" para el giro constante de las helíces
+   
+   helic.cupula_ancho = 3;
+   helic.cupula_alto = 4;
+   helic.cupula_largo = 3; 
+   helic.bloque_prin_ancho = 4 ;
+   helic.bloque_prin_largo = 3;
+   helic.bloque_prin_alto = 3;
+   helic.posaderas_ancho = 3.4;
+   helic.posaderas_largo = 0.5;
+   helic.sujeccion_long = 0.7;
+   helic.cola_long = 5;
+   helic.cola_grosor = 0.2;
+   helic.torre_altura = 2 ;
+   helic.torre_ancho = 1 ;
+   helic.torre_largo = 0.2;
+   helic.helsup_ancho = 8 ;
+   helic.helsup_largo = 0.5;
+   helic.cilindro_helices_sup_long = 1.3 ;
+   helic.cilindro_helices_post_long = 0.5;
+   helic.helpost_ancho = 2 ;
+   helic.helpost_largo = 0.2 ;
+   helic.posaderas_altura = 0.2 ;
+   helic.grosor_cilindro_helices_sup = 0.05;
+   helic.helsup_grosor = 0.1;
+   helic.cilindro_helices_post_grosor = 0.05;
+   
+//para recalcular posiciones cuando avanzo y giro
+
+   helic.t=0;//es x, le llamo t para que no se confunda con la x del giro de hélices
+   helic.z=0;
+   helic.xv=1;
+   helic.zv=0;
+   helic.landa=0;
+   helic.x0=0;
+   helic.z0=0;
+   
+}
+
+int x = 45;//para el giro constante de las hélices
+int inclinacionHelic = 0;//para que se incline hacia delante y hacia atrás cuando avanza o retrocede respectivamente
+
+void DibujaHelicoptero( void ){
+      
+   //Movimientos sobre el helicoptero
+   glPushMatrix();
+
+   if(helic.avanza==1){//si está avanzando o retrocediendo
+     helic.t=helic.x0+helic.landa*helic.xv;
+     helic.z=helic.z0+helic.landa*helic.zv;
+   }
+   
+   if(helic.gira==1){//si está girando
+     helic.x0=helic.t;
+     helic.z0=helic.z;
+     helic.landa=0;
+     helic.zv = -sin(grad2rad(helic.angY));
+     helic.xv = cos(grad2rad(helic.angY));
+   } 
+
+   glTranslatef(helic.t,0,helic.z); 
+  // glRotatef(helic.angY,0,1,0); 
+glRotatef(helic.angY,0,0,1); 
+   glTranslatef(0, helic.altura, 0 );
+
+   //Controlamos la inclinacion cuando va hacia delante y hacia atŕas
+    if(helic.velangX != 0 && helic.altura > 0){
+      if(helic.velangX > 0 && inclinacionHelic > -7)
+	inclinacionHelic -= 1;
+      if(helic.velangX < 0 && inclinacionHelic < 7)
+	inclinacionHelic += 1;
+    
+    glRotatef(inclinacionHelic,0,0,1);
+    }
+   //Para compensar la inclinacion cuando esté parado
+    else if(helic.velangX == 0 || helic.altura <= 0.3){
+      if(inclinacionHelic > 0 ){//si está inclinado hacia delante
+	inclinacionHelic -= 1;
+	glRotatef(inclinacionHelic,0,0,1);
+      }
+      if(inclinacionHelic < 0 ) {//si está inclinado hacia atrás
+	inclinacionHelic += 1;
+        glRotatef(inclinacionHelic,0,0,1);
+      }
+    }  
+	/*NOTA: en la compensación de la inclinación, sumamos y restamos de 1 en 1 para que el movimiento de inclinación se vea fluido*/
+
+
+    //Dibujamos la cupula
+
+glPushMatrix();
+    int i;
+    double cupula_x;
+    double cupula_y;
+
+    glTranslatef(helic.bloque_prin_ancho-2, 2 + (helic.sujeccion_long*(sin(grad2rad(45)))) + helic.posaderas_altura,0);
+    glRotatef(-90,0,0,1);   
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[celeste]);
+
+for(i=0;i<90;i++){
+
+
+     
+      cupula_x = helic.cupula_ancho*(cos(grad2rad(i)));
+      cupula_y = helic.cupula_ancho*(sin(grad2rad(i)));
+      
+      caja(cupula_x,cupula_y,helic.cupula_largo);
+    }
+
+    
+    glPopMatrix();
+
+    // Dibujamos el bloque principal
+    
+    glPushMatrix();
+      glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+      glTranslatef(0  ,0.5 + (helic.sujeccion_long*(sin(grad2rad(45)))) + helic.posaderas_altura ,  0);
+      caja(helic.bloque_prin_ancho,helic.bloque_prin_alto,helic.bloque_prin_largo);
+    glPopMatrix();
+    
+    // Dibujamos las posaderas
+    
+    glPushMatrix();
+    
+      //Posadera 1
+      glPushMatrix();
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	glTranslatef(0, 0.5,-helic.bloque_prin_largo/4.0);
+	caja(helic.posaderas_ancho, helic.posaderas_altura , helic.posaderas_largo);
+	//Sujeccion izquierda
+	glPushMatrix();
+	  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	  glTranslatef(-helic.posaderas_ancho/3,0.2,0);
+	  glRotatef(-45,0,0,1);
+	  falsoCilindro(helic.sujeccion_long,0.05);
+	glPopMatrix();
+	//Sujeccion derecha
+	glPushMatrix();
+	  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	  glTranslatef(helic.posaderas_ancho/3,0.2,0);
+	  glRotatef(45,0,0,1);
+	  falsoCilindro(helic.sujeccion_long,0.05);
+	glPopMatrix();
+      glPopMatrix();
+      
+      //Posadera 2
+      glPushMatrix();
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	glTranslatef(0,0.5,helic.bloque_prin_largo/4.0);
+	caja(helic.posaderas_ancho, helic.posaderas_altura , helic.posaderas_largo);
+	//Sujeccion izquierda
+	glPushMatrix();
+	  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	  glTranslatef(-helic.posaderas_ancho/3,0.2,0);
+	  glRotatef(-45,0,0,1);
+	  falsoCilindro(helic.sujeccion_long,0.05);
+	glPopMatrix();
+	//Sujeccion derecha
+	glPushMatrix();
+	  glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	  glTranslatef(helic.posaderas_ancho/3,0.2,0);
+	  glRotatef(45,0,0,1);
+	  falsoCilindro(helic.sujeccion_long,0.05);
+	glPopMatrix();
+      glPopMatrix();
+      
+      
+    glPopMatrix();
+    
+    //Hélices superiores
+    glPushMatrix();
+    
+      glTranslatef(0,0.5 + (helic.sujeccion_long*(sin(grad2rad(45)))) + helic.posaderas_altura + helic.bloque_prin_alto,0);
+      glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+      falsoCilindro(helic.cilindro_helices_sup_long,helic.grosor_cilindro_helices_sup);
+      glPushMatrix();
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	glTranslatef(0,1.1,0);
+	//Rotación constante de las hélices
+	if(helic.helices_on == 1){
+	  glRotatef(x,0,1,0);
+	  x += 20;
+	  if(x == 360)
+	    x = 5;    
+	}  
+	else
+	  glRotatef(45,0,1,0);
+	
+	caja(helic.helsup_ancho, helic.helsup_grosor , helic.helsup_largo);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+	glTranslatef(0,0.15,0);
+	glRotatef(90,0,1,0);
+	caja(helic.helsup_ancho, 0.1, helic.helsup_largo);
+      glPopMatrix(); 
+    
+    glPopMatrix();
+    
+    //Hélices posteriores y cola
+    glPushMatrix();
+    
+     glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+     glTranslatef(-helic.bloque_prin_ancho/2.0,0.5 + (helic.sujeccion_long*(sin(grad2rad(45)))) + helic.posaderas_altura +    helic.bloque_prin_alto/2.0,0);
+      //Cola
+      glPushMatrix();
+	glRotatef(90,0,0,1);
+	falsoCilindro(helic.cola_long,helic.cola_grosor);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+      glPopMatrix();
+      //Torre de cola
+      glTranslatef(-helic.cola_long/1.2,helic.cola_grosor/2,helic.cola_grosor);
+      creaTorre(helic.torre_altura,helic.torre_ancho,helic.torre_largo,helic.torre_altura);
+      glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+      glTranslatef(0,helic.torre_altura/2.0,0);
+      glRotatef(90,1,0,0);
+      falsoCilindro(helic.cilindro_helices_post_long,helic.cilindro_helices_post_grosor);
+      glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[gris]);
+      glTranslatef(0,0.15,0);
+      //Rotación constante de las hélices
+	if(helic.helices_on == 1){
+	  glRotatef(x,0,1,0); 
+	  x += 20;
+	  if(x == 360)
+	    x = 5;    
+	}  
+	else
+	  glRotatef(45,0,1,0); 
+      
+      caja(helic.helpost_ancho, 0.1 , helic.helpost_largo);
+      glTranslatef(0,0.15,0);
+      glRotatef(90,0,1,0);
+      caja(helic.helpost_ancho, 0.1 , helic.helpost_largo);
+      
+    glPopMatrix();
+      
+    glPopMatrix(); 		// Desapila la transformacion geometrica
+    
+    glutSwapBuffers();	// Intercambia el buffer de dibujo y visualizacion
+    
+    
+}
+
+
+
+/**	void Dibuja( void )
+
+Procedimiento de dibujo del modelo. Es llamado por glut cada vez que se debe tredibujar.
+
+**/
+ 
+void Dibuja( void )
+{
+   static GLfloat pos[4] = {5.0, 5.0, 10.0, 0.0 };		// Posicion de la fuente de luz
+   int i;
+   
+   glPushMatrix();		// Apila la transformacion geometrica actual
+ 
+   glClearColor(0,0,0.6,1);	// Fija el color de fondo a azul
+ 
+   glClear( GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT );	 // Inicializa el buffer de color
+ 
+   transformacionVisualizacion();	 // Carga transformacion de visualizacion
+ 
+   glLightfv( GL_LIGHT0, GL_POSITION, pos );	// Declaracion de luz. Colocada aqui esta fija en la escena
+  
+   //ejes(3);	// Dibuja los ejes
+
+// Dibuja el suelo
+
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,color[verde]);
+    glTranslatef(0,-0.5,0);
+    caja(200,0.5,200);
+
+// Dibuja el helicopterol
+    
+    DibujaHelicoptero();   
+  
+    glPopMatrix(); 		// Desapila la transformacion geometrica
+
+    glutSwapBuffers();	// Intercambia el buffer de dibujo y visualizacion
+}
+
+
+/**	void idle()
+ 
+Procedimiento de fondo. Es llamado por glut cuando no hay eventos pendientes.
+
+**/
+void idle()
+{
+  //Controlamos el giro de las helices
+  if(helic.altura > 0 )  
+    helic.helices_on = 1;//si el helicoptero esta volando, activamos las hélices
+  else
+    helic.helices_on = 0;//descativamos el giro de las hélices si el helicoptero no está volando
+  
+  //Contralamos que no sobrepase el suelo
+  if(helic.altura <= 0.3 && helic.velaltura < 0 ){
+    helic.altura = 0;        
+    helic.velangX = 0;
+    helic.velaltura = 0;
+    helic.giroangY =0;
+  }
+  else if (helic.altura < 0 && helic.velaltura < 0){
+
+    helic.velaltura = 0;
+    }
+  else  
+    helic.altura += helic.velaltura*0.08;
+  
+  //Para que no se mueva si está en el suelo parado
+  if((helic.giroangY >= 1 || helic.giroangY <= -1) && helic.altura >0){//si no está en el suelo, le permitimos el giro
+    helic.gira = 1;
+    helic.angY += helic.giroangY*0.3;
+  }
+  else//si esta en el suelo, no puede girar
+    helic.gira = 0;
+  
+  if((helic.velangX >=1 || helic.velangX <= -1) && helic.altura >0){//si no está en el suelo, le permitimos avanzar
+    helic.avanza = 1;
+    helic.landa += helic.velangX*0.3;
+  }
+  else 
+    helic.avanza = 0;//si está en el suelo, no pude avanzar
+  
+  gluiPostRedisplay();			// Redibuja
+  glutTimerFunc(30,idle,0);		// Vuelve a lanzar otro evento de redibujado en 30 ms
+}
+
+ 
