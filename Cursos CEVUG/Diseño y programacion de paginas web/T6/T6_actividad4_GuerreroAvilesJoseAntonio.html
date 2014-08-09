@@ -1,0 +1,19 @@
+<SCRIPT>
+horaActual=new Date()
+
+var hora = new Object();
+hora.h=horaActual.getHours();
+hora.m=horaActual.getMinutes();
+
+hora.hora_corta = function() { 
+    
+    longMin = new String (hora.m); 
+    if (longMin.length == 1){
+        hora.m ="0"+hora.m;
+    }
+    a=hora.h+":"+hora.m;
+    return a;
+};
+
+document.write(hora.hora_corta());
+</SCRIPT>

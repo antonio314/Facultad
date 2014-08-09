@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Author" content="José Antonio Guerrero Avilés"/> 
+<link rel="stylesheet" type="text/css" href="viajesguerrero.css"/>
+<title>Viajes Guerrero</title>
+
+<script type="text/javascript">
+//array para las imagenes
+var foto = new Array();
+foto[0] = "./imagenes/casa_1.jpg";
+foto[1] = "./imagenes/casa2.jpg";
+foto[2] = "./imagenes/casa_3.jpg";
+foto[3] = "./imagenes/hotel4.jpg";
+foto[4] = "./imagenes/hotel5.jpg";
+foto[5] = "./imagenes/hotel6.jpg";
+foto[6] = "./imagenes/hotel7.jpg";
+foto[7] = "./imagenes/hotel8.jpg";
+foto[8] = "./imagenes/hotel9.jpg";
+
+
+//array para los textos de las imagenes (las descripciones)
+var texto = new Array();
+texto[0] = "Cortijo 'El Naranjo'";
+texto[1] = "Complejo 'Sahara'";
+texto[2] = "Rural 'Maramien'";
+texto[3] = "Hotel **** 'La Isla'";
+texto[4] = "Hotel **** 'Tropicana'";
+texto[5] = "Complejo 'La Arboleda'";
+texto[6] = "Hotel **** 'Asiri'";
+texto[7] = "Hotel ***** 'Shine'";
+texto[8] = "Hotel ***** 'Bahía'";
+
+//variable que nos indica la imagen actual
+var cualvemos = 0;
+
+function mover(direccion) {
+
+  // accedemos al objeto que contiene la imagen
+  var laimagen = document.getElementById("misfotos");
+
+  // accedemos al objeto que contiene el texto
+  var eltexto = document.getElementById("mistextos");
+
+  // ¿cuál es el indice de la última imágen en nuestro array?
+  var ultima = foto.length - 1;
+  
+  // antes de cambiar los datos, en un auxilar, verificamos cuál sería la imagen a mostrar
+  var auxiliar = cualvemos + direccion; // se sumará 1 o se restará 1 al índice dependiendo de si hacemos clic en anterior o en siguiente. Dirección es un argumento pasado y será +1 o -1, es decir, haremos mover(+1) o mover(-1)
+  
+  // si el resultado es menor que cero, le decimos que vaya al otro extremo y muestre la ultima
+  if(auxiliar < 0) { auxiliar = ultima; }
+  
+  // si el resultado es mayor que la última, le decimos que vuelva al principio
+  if(auxiliar > ultima) { auxiliar = 0; }
+  
+  //ahora cambiamos los datos
+  cualvemos = auxiliar;
+  
+  // ponemos la dirección URL de la imagen en la etiqueta IMG (lo coge del array foto)
+  laimagen.src = foto[cualvemos];
+
+  // ponemos el texto en la etiqueta SPAN (lo coge del array texto)
+  eltexto.innerHTML = texto[cualvemos];
+
+}
+</script>
+
+
+</head>
+
+
+<body>
+    <div id="pagina">
+        <div class="topNaviagationLink"><a href="index.html">Inicio</a></div>
+        <div class="topNaviagationLink"><a href="quienessomos.html">¿Quines Somos?</a></div>
+        <div class="topNaviagationLink"><a href="galeria.html">Galería</a></div>
+        <div class="topNaviagationLink"><a href="servicios.html">Servicios</a></div>
+	    <div class="topNaviagationLink"><a href="contacto.html">Contacto</a></div>
+	</div>
+    <div id="mainPicture">
+    	<div class="picture">
+        	<div id="Titulo">Viajes Guerrero</div>
+            <div id="Subtitulo">Tu mejor descanso al mejor precio</div>
+        </div>
+    </div>
+    
+    <!--galería de imágenes-->
+    
+<div class="marcoGaleria">
+<div calss="textoContenido">
+  <h4 class="textoContenido">Estas son algunas imágenes de los Hoteles y complejos vacacionales que ofertamos. No dude en preguntar por cualquiera de ellos.</h4>
+</div>
+  <div class="galeria">
+  <img id="misfotos" src="./imagenes/casa_1.jpg" />
+  <span id="mistextos"> Cortijo El Naranjo </span>
+  <div>
+    <a href="javascript:mover(-1);"> Anterior </a> | <a href="javascript:mover(+1);"> Siguiente </a>
+  <p>&nbsp;</p>
+  </div>
+</div>
+</div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</div>
+</body>
+</html>

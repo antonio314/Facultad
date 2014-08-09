@@ -1,0 +1,23 @@
+<SCRIPT>
+a=parseInt(prompt( "Indique un valor para a", "" ));
+b=parseInt(prompt( "Indique un valor para b", "" ));
+
+if(!isNaN(a) && !isNaN(b)){
+
+	if(a<b){
+    		document.writeln("a=",a," es menor que b=",b);
+	}
+	else{
+		if(a>b){
+    			document.writeln("b=",b," es menor que a=",a);
+		}
+		else{
+    			document.writeln("a=",a," es igual que b=",b);
+		}
+	}
+}
+else{
+    			document.writeln("Alguno de los parámetros introducidos no es un número, vuelva a ejecutar el programa. Gracias");
+}
+
+</SCRIPT>

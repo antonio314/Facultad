@@ -1,0 +1,103 @@
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-family:"Times New Roman", Times, serif;
+	font-size: 13px;
+	color: #061C37;
+	background: #014D5D;
+	background-repeat:repeat-x;
+}
+*{
+  margin: 0 auto 0 auto;
+ text-align:left;
+}
+
+#pagina
+{
+  display: block; 
+  height:auto;
+  position: relative; 
+  overflow: hidden; 
+  width: 670px;
+  font-size: 28px;
+  font-family:"Times New Roman", Times, serif;
+  text-align:center;
+  color: #FFFFFF;
+}
+
+#mainPicture
+{
+width:820px;
+height:400px;
+background-color:#FFFFFF;
+}
+
+#mainPicture .picture
+{
+position:relative;
+width:800px;
+height:380px;
+top:10px;
+background-image:url(http://img59.imageshack.us/img59/6158/sinttulo4kzq.jpg);
+background-repeat:no-repeat;
+margin-left:10px;
+}
+
+#Titulo
+{
+position:relative;
+top:30px;
+left:40px;
+font-size:25px;
+color:#FFFFFF;
+font-family:"Times New Roman", Times, serif;
+margin-left: 80px;
+}
+
+#Subtitulo
+{
+position:relative;
+top:30px;
+left:50px;
+font-size:14px;
+color:#A9C8FA;
+font-family:"Times New Roman", Times, serif;
+margin-left: 100px;
+}
+
+.tablaContenido
+{
+width:820px;
+height:auto;
+background-color:#FFFFFF;
+margin-top:5px;
+}
+
+.tituloContenido
+{
+font-size:19px;
+margin-bottom:0px;
+padding-top:18px;
+margin-left:15px;
+margin-top:15px;
+}
+
+.textoContenido
+{
+font-size: 18px;
+text-align: justify;
+line-height: 24px;
+margin-left: 13px;
+margin-right: 13px;
+margin-top: 15px;
+}
+
+html, body {
+text-align: center;
+}
+
+p {
+text-align: left;
+}

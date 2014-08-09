@@ -1,0 +1,152 @@
+/*CSS creado por José Antonio Guerrero Avilés*/
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-family:"Times New Roman", Times, serif;
+	font-size: 13px;
+	color: #061C37;
+	background: #014D5D;
+	background-repeat:repeat-x;
+}
+*{
+  	margin: 0 auto 0 auto;
+ 	text-align:left;
+}
+
+#pagina
+{
+  	display: block; 
+  	height:auto;
+  	position: relative; 
+  	overflow: hidden; 
+  	width: 670px;
+}
+
+.topNaviagationLink
+{
+	text-align:center;
+	position:relative;
+	margin-top:30px;
+	font-size:16px;
+	width:130px;
+	height: 35px;
+	line-height: 35px;
+	float:left;
+	color:#CEEAEE;
+	font-family:"Times New Roman", Times, serif;
+}
+
+.topNaviagationLink a
+{
+	color:#CDE2FC;
+}
+
+#mainPicture
+{
+	width:670px;
+	height:345px;
+	background-color:#FFFFFF;
+}
+
+.picture
+{
+	position:relative;
+	width:650px;
+	height:325px;
+	top:10px;
+	background-image:url(viajesguerrero.jpg);
+	background-repeat:no-repeat;
+	margin-left:10px;
+}
+
+#Titulo
+{
+	position:relative;
+	top:30px;
+	left:40px;
+	font-size:25px;
+	color:#FFFFFF;
+	font-family:"Times New Roman", Times, serif;
+}
+
+#Subtitulo
+{
+	position:relative;
+	top:30px;
+	left:50px;
+	font-size:14px;
+	color:#A9C8FA;
+	font-family:"Times New Roman", Times, serif;
+}
+
+.tablaContenido
+{
+	width:670px;
+	height:auto;
+	background-color:#FFFFFF;
+	margin-top:5px;
+}
+
+.tituloContenido
+{
+	font-size:19px;
+	font-weight: bold;
+	margin-bottom:0px;
+	margin-top:15px;
+	padding-top:18px;
+}
+
+.textoContenido
+{
+	font-size: 18px;
+	text-align: justify;
+	line-height: 24px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+html, body {
+text-align: center;
+}
+
+p {
+text-align: left;
+}
+
+
+
+/*CSS para la galería*/
+
+.marcoGaleria {
+background-color: #FFFFFF;
+margin-top: 20px;
+margin-bottom: 20px
+padding: 10px;
+width: 670px;
+}
+
+.galeria {
+    position: relative
+    text-align: center;
+    width: 600px;
+}
+
+.galeria img {
+    background-color: #FFFFFF;
+    height: 500px;
+    width: 600px;
+    margin-top: 20px
+}
+
+.galeria span {
+    color: #FFFF;
+    display: block;
+    font-family:"Times New Roman", Times, serif;
+    font-size: 20px;
+    padding: 5px 0;
+}
+

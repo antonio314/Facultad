@@ -1,0 +1,65 @@
+<SCRIPT>
+/*Modificado el programa de la hora para que los parámetros se obtenga por mensaje emergente (prompt)*/
+
+/*Objeto hora con su función para crear el formato de la hora*/
+var hora = new Object();
+hora.hhmm = prompt("Introduce la hora de la cita:");
+
+hora.hora_corta = function() { 
+    /*
+    - Si introduce un único número, supongamos hora=1, el programa convierte la hora a las 01:00
+    - Si introduce la hora con dos dígitos, supongamos 12, el programa convierte la hora a las 12:00
+    -Para el resto de casos, suponemos que el usuario introducirá la hora de la forma HH:MM
+    */   
+    var longHora = new String(hora.hhmm);
+     if(longHora.length == 1){
+         hora.hhmm = "0"+hora.hhmm+":00";
+    }
+    else if(longHora.length == 2){
+         hora.hhmm = +hora.hhmm+":00";
+    }
+    
+    return (hora.hhmm);
+    
+};
+
+/*Objeto fecha con su función para crear el formato de la fecha*/
+var fecha=new Object();
+fecha.dia = prompt("Introduce el dia de la cita:");
+fecha.mes = prompt("Introduce el mes de la cita:");
+fecha.anio = prompt("Introduce el año de la cita:");
+
+fecha.crearFecha = function(){
+    
+    var longDia = new String(fecha.dia);
+    var longMes = new String(fecha.mes);
+    var longAnio = new String(fecha.anio);
+    
+    if(longDia.length == 1){
+        fecha.dia = "0"+fecha.dia;
+    }
+    if(longMes.length == 1){
+        fecha.mes = "0"+fecha.mes;
+    }
+    if(longAnio.length == 2){
+        fecha.anio = "20"+fecha.anio;
+    }
+
+    return(fecha.dia+"-"+fecha.mes+"-"+fecha.anio);
+    
+};
+
+/*Objeto cita con su función para crear el formato de la cita*/
+var cita = new Object();
+
+cita.asunto=prompt("Introduce el asunto de la cita:");
+cita.lugar=prompt("Introduce el lugar de la cita");
+
+cita.crearCita = function(){
+    
+    return(cita.asunto+", "+cita.lugar);
+    
+};
+    
+document.write(fecha.crearFecha()+", "+hora.hora_corta()+": "+cita.crearCita());
+</SCRIPT>
