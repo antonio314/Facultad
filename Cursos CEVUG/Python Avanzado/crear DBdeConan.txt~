@@ -1,0 +1,14 @@
+//Comando para entrar en el modo interactivo
+mysql -u root -p 
+
+//Creamos la base de datos con el nombre de DBdeConan
+CREATE DATABASE DBdeConan; 
+
+//Creamos un usuario "conan" que tenga la contraseña "crom" y que tenga todos los permisos en la base de datos DBdeConan
+GRANT ALL ON DBdeConan.* TO 'conan'@'localhost' IDENTIFIED BY 'crom'; 
+
+//Seleccionamos la base de datos para trabajar con ella
+USE DBdeConan; 
+
+//Creamos una tabla llamada Victimas con tres campos, llamados id, Nombre, Profesion y Muerte
+CREATE TABLE Victimas (id INT, Nombre VARCHAR(100),Profesion VARCHAR(100),Muerte VARCHAR(100));
