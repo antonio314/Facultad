@@ -1,0 +1,18 @@
+Compilar
+-----------
+mpicc prog.c -o programa
+
+
+Ejecutar
+----------
+mpirun -n 2 --hostfile lista programa
+
+
+
+__________________________________________________________
+
+Hacer ssh a las maquinas a las que nos vamos a conectar:
+
+ssh ei1419
+
+y aceptamos la clave
